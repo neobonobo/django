@@ -1,0 +1,60 @@
+# Django specific
+*.log
+*.sqlite3
+*.db
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+db.sqlite3
+
+# Environment files
+.env
+.env.*
+
+# Static files
+/static/
+
+# Media files
+/media/
+
+# Django migrations
+**/migrations/
+!**/migrations/__init__.py
+
+# Settings and secret files
+settings.py
+settings_local.py
+
+# Rasa specific
+*.rasa
+*.db
+*.log
+*.sqlite
+*.pkl
+*.md
+*.tmp
+*.bak
+
+# Environment files
+.env
+.env.*
+
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+.env/
+__pycache__/
+
+# IDE specific
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
