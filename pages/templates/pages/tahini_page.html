@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahini - Our Product</title>
+    {% load static %}  <!-- This is necessary to use static files -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Tahini</h1>
+    </header>
+    <main>
+        <section>
+            <h2>About Our Tahini</h2>
+            <p>Tahini is a delicious sesame paste used in various recipes.</p>
+            <p>For more details and to buy, visit our <a href="https://shopify.com/yourshop">Shopify store</a>.</p>
+            <img src="{% static 'images/tahini.jpg' %}" alt="Tahini Image">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Köycebiz</p>
+    </footer>
+</body>
+</html>

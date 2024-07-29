@@ -1,3 +1,4 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+class TahiniPageView(TemplateView):
+    template_name = 'pages/tahini_page.html'
