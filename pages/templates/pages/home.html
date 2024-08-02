@@ -1,13 +1,45 @@
 <!-- pages/templates/pages/home.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Chat</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
+    <div class="avatar">
+        <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+    </div>
+    <h1>Welcome to the Chat Page</h1>
+    <form id="chat-form">
+        <input type="text" id="user-message" placeholder="Type a message">
+        <button type="submit">Send</button>
+    </form>
+    <div id="chat-output"></div>
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userMessage = document.getElementById('user-message').value;
+            fetch('http://localhost:5005/webhooks/rest/webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage, sender: 'user' }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatOutput = document.getElementById('chat-output');
+                chatOutput.innerHTML += '<p>User: ' + userMessage + '</p>';
+                chatOutput.innerHTML += '<p>Bot: ' + data[0].text + '</p>';
+                document.getElementById('user-message').value = '';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>
