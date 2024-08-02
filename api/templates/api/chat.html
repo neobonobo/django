@@ -1,90 +1,41 @@
+<!-- api/templates/api/chat.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rasa Chat</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        #chat-container {
-            width: 300px;
-            margin: 0 auto;
-        }
-        #messages {
-            border: 1px solid #ddd;
-            padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
-        .message {
-            margin: 5px 0;
-        }
-        .user {
-            color: blue;
-        }
-        .bot {
-            color: green;
-        }
-    </style>
+    <title>Chat</title>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="messages"></div>
-        <input type="text" id="message-input" placeholder="Type a message..." />
-        <button id="send-button">Send</button>
-    </div>
+    <h1>Welcome to the Chat Page</h1>
+    <form id="chat-form">
+        <input type="text" id="user-message" placeholder="Type a message">
+        <button type="submit">Send</button>
+    </form>
+    <div id="chat-output"></div>
     <script>
-        document.getElementById('send-button').addEventListener('click', function() {
-            sendMessage();
-        });
-
-        document.getElementById('message-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        function sendMessage() {
-            const messageInput = document.getElementById('message-input');
-            const message = messageInput.value;
-            if (message.trim() === '') return;
-
-            addMessage('user', message);
-
-            fetch('/api/rasa/', {
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userMessage = document.getElementById('user-message').value;
+            fetch('/api/rasa-webhook/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ message: userMessage, sender: 'user' }),
             })
             .then(response => response.json())
             .then(data => {
-                if (data && data.length > 0) {
-                    data.forEach(msg => addMessage('bot', msg.text));
-                }
+                const chatOutput = document.getElementById('chat-output');
+                chatOutput.innerHTML += '<p>User: ' + userMessage + '</p>';
+                chatOutput.innerHTML += '<p>Bot: ' + data[0].text + '</p>';
+                document.getElementById('user-message').value = '';
             })
             .catch(error => {
                 console.error('Error:', error);
-                addMessage('bot', 'Sorry, there was an error.');
             });
-
-            messageInput.value = '';
-        }
-
-        function addMessage(sender, message) {
-            const messagesDiv = document.getElementById('messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = message;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
+        });
     </script>
 </body>
 </html>

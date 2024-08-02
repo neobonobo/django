@@ -1,4 +1,6 @@
+# pages/views.py
+
 from django.views.generic import TemplateView
 
-class TahiniPageView(TemplateView):
-    template_name = 'pages/tahini_page.html'
+class HomePageView(TemplateView):
+    template_name = 'pages/home.html'

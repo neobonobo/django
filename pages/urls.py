@@ -1,6 +1,8 @@
+# pages/urls.py
+
 from django.urls import path
-from .views import TahiniPageView
+from .views import HomePageView
 
 urlpatterns = [
-    path('tahini/', TahiniPageView.as_view(), name='tahini_page'),
+    path('', HomePageView.as_view(), name='home'),
 ]
