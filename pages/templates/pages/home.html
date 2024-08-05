@@ -1,28 +1,28 @@
-<!-- pages/templates/pages/home.html -->
 <!DOCTYPE html>
 <html lang="en">
+	{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class="avatar">
-        <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+    <div class="chat-container">
+        <div class="avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+        </div>
+        <div class="chat-box" id="chat-output"></div>
+        <form id="chat-form" class="input-box">
+            <input type="text" id="user-message" placeholder="Type a message">
+            <button type="submit">Send</button>
+        </form>
     </div>
-    <h1>Welcome to the Chat Page</h1>
-    <form id="chat-form">
-        <input type="text" id="user-message" placeholder="Type a message">
-        <button type="submit">Send</button>
-    </form>
-    <div id="chat-output"></div>
     <script>
         document.getElementById('chat-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const userMessage = document.getElementById('user-message').value;
-            fetch('http://localhost:5005/webhooks/rest/webhook', {
+            fetch('https://www.koycebiz.com/api/rasa/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
