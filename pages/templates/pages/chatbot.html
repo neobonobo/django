@@ -1,35 +1,40 @@
-<!-- api/templates/api/chat.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Rasa ChatBot</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Chat Page</h1>
-    <form id="chat-form">
-        <input type="text" id="user-message" placeholder="Type a message">
-        <button type="submit">Send</button>
-    </form>
-    <div id="chat-output"></div>
+    <div class="chat-container">
+        <div class="avatar">
+            <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+        </div>
+        <div class="chat-box" id="chat-output"></div>
+        <form id="chat-form" class="input-box">
+            <input type="text" id="user-message" placeholder="Type a message">
+            <button type="submit">Send</button>
+        </form>
+    </div>
     <script>
         document.getElementById('chat-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const userMessage = document.getElementById('user-message').value;
-            fetch('/api/rasa-webhook/', {
+
+            fetch('/api/chat/', {  // Pointing to the RasaChatBotView endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: userMessage, sender: 'user' }),
+                body: JSON.stringify({ message: userMessage }),
             })
             .then(response => response.json())
             .then(data => {
                 const chatOutput = document.getElementById('chat-output');
                 chatOutput.innerHTML += '<p>User: ' + userMessage + '</p>';
-                chatOutput.innerHTML += '<p>Bot: ' + data[0].text + '</p>';
+                chatOutput.innerHTML += '<p>Bot: ' + data.message + '</p>';
                 document.getElementById('user-message').value = '';
             })
             .catch(error => {

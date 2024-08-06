@@ -1,9 +1,9 @@
 # api/urls.py
+# api/urls.py
 
 from django.urls import path
-from .views import ChatView, rasa_webhook
+from .views import RasaChatBotView
 
 urlpatterns = [
-    path('chat/', ChatView.as_view(), name='chat'),
-    path('rasa-webhook/', rasa_webhook, name='rasa_webhook'),
+    path('chat/',RasaChatBotView.as_view(), name='rasa-chatbot'),
 ]

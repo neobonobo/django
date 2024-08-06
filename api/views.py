@@ -1,22 +1,33 @@
 # api/views.py
-
-from django.views.generic import TemplateView
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
 
-class ChatView(TemplateView):
-    template_name = 'api/chat.html'
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-@csrf_exempt
-def rasa_webhook(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            response = requests.post('http://localhost:5005/webhooks/rest/webhook', json=data)
-            return JsonResponse(response.json(), safe=False)
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
-    else:
-        return JsonResponse({"error": "Only POST method is allowed"}, status=405)
+class RasaChatBotView(APIView):
+    def post(self, request, *args, **kwargs):
+        user_message = request.data.get('message')
+        if not user_message:
+            return Response({'error': 'Message is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Forward the message to Rasa
+        rasa_response = requests.post(
+            'http://localhost:5005/webhooks/rest/webhook',  # Rasa server URL
+            json={"message": user_message, "sender": "user"}
+        )
+
+        if rasa_response.status_code != 200:
+            return Response({'error': 'Failed to communicate with Rasa'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        rasa_response_data = rasa_response.json()
+
+        # Extract the bot's response
+        if rasa_response_data:
+            bot_response = rasa_response_data[0].get('text', 'No response from bot')
+        else:
+            bot_response = 'No response from bot'
+
+        return Response({'message': bot_response}, status=status.HTTP_200_OK)
+
