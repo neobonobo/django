@@ -6,24 +6,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rasa ChatBot</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        .bot-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .avatar {
+            margin-right: 10px;
+        }
+        .avatar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .bot-response {
+            background-color: #f9f9f9;
+            padding: 10px;
+            flex: 1;
+        }
+        .input-container {
+            width: 100%;
+        }
+        .input-box {
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none;
+            outline: none;
+        }
+        .input-box button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            outline: none;
+        }
+        .input-box button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="chat-container">
-        <div class="avatar">
-            <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+        <div class="bot-wrapper">
+            <div class="avatar">
+                <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+            </div>
+            <div id="chat-output" class="bot-response"></div>
         </div>
-        <div class="chat-box" id="chat-output"></div>
-        <form id="chat-form" class="input-box">
-            <input type="text" id="user-message" placeholder="Type a message">
-            <button type="submit">Send</button>
-        </form>
+        <div class="input-container">
+            <form id="chat-form" class="input-box">
+                <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
+                <button type="submit">Send</button>
+            </form>
+        </div>
     </div>
     <script>
         document.getElementById('chat-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            const userMessage = document.getElementById('user-message').value;
+            const userMessage = document.getElementById('user-message').value.trim();
 
-            fetch('/api/chat/', {  // Pointing to the RasaChatBotView endpoint
+            if (userMessage === "") return;
+
+            document.getElementById('user-message').value = '';
+
+            fetch('/api/chat/', {  // Adjust endpoint if necessary
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,13 +96,18 @@
             .then(response => response.json())
             .then(data => {
                 const chatOutput = document.getElementById('chat-output');
-                chatOutput.innerHTML += '<p>User: ' + userMessage + '</p>';
-                chatOutput.innerHTML += '<p>Bot: ' + data.message + '</p>';
-                document.getElementById('user-message').value = '';
+                chatOutput.innerHTML = '<p>' + data.message + '</p>';
+                chatOutput.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+        });
+
+        document.getElementById('user-message').addEventListener('focus', function() {
+            const chatOutput = document.getElementById('chat-output');
+            chatOutput.style.display = 'none';
+            chatOutput.innerHTML = '';
         });
     </script>
 </body>
