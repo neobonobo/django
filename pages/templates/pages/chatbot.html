@@ -36,11 +36,13 @@
         }
         .input-container {
             width: 100%;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
         }
         .input-box {
             display: flex;
             width: 100%;
-            margin-top: 10px;
         }
         .input-box input {
             flex: 1;
@@ -60,21 +62,27 @@
         .input-box button:hover {
             background-color: #0056b3;
         }
+        .you-text {
+            margin-right: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+	<a href="{% url 'tahini' %}">Learn more about our Tahini</a>
     <div class="chat-container">
+        <div class="input-container">
+            <div class="you-text">You:</div>
+            <form id="chat-form" class="input-box">
+                <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
+                <button type="submit">Send</button>
+            </form>
+        </div>
         <div class="bot-wrapper">
             <div class="avatar">
                 <img src="{% static 'images/avatar.png' %}" alt="Avatar">
             </div>
             <div id="chat-output" class="bot-response"></div>
-        </div>
-        <div class="input-container">
-            <form id="chat-form" class="input-box">
-                <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
-                <button type="submit">Send</button>
-            </form>
         </div>
     </div>
     <script>
@@ -96,7 +104,7 @@
             .then(response => response.json())
             .then(data => {
                 const chatOutput = document.getElementById('chat-output');
-                chatOutput.innerHTML = '<p>' + data.message + '</p>';
+                chatOutput.innerHTML = data.message; // Render the message as HTML
                 chatOutput.style.display = 'block';
             })
             .catch(error => {

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahini the Hard Way</title>
+    <link rel="stylesheet" href="{% static 'css/tahini.css' %}">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #4CAF50;
+            text-align: left;
+            grid-column: span 2;
+            margin-bottom: 40px;
+        }
+
+        .concept {
+            background-color: #e9f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 20%;
+            object-fit: cover;
+        }
+
+		.concept a {
+			text-decoration: none;
+			color:black;
+		}
+        .concept p {
+
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .concept strong {
+            font-size: 1.4em;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stone-Milled Tahini</h1>
+
+        <div class="concept">
+            <img src="{% static 'images/no_pesticides.jpg' %}" alt="No Pesticides">
+            <div>
+                <strong>No Pesticides</strong>
+                <p>We don't use pesticides to kill bugs. Instead, we use organic solutions that are safe for the environment and for our customers.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/no_herbicides.jpg' %}" alt="No Herbicides">
+            <div>
+                <strong>No Herbicides</strong>
+                <p>We don’t use herbicides to kill weeds. Instead, we rely on the hard work of our volunteers who constantly weed the fields manually.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/no_gmo.jpg' %}" alt="No GMO Seeds">
+            <div>
+                <strong>No GMO Seeds</strong>
+                <p>We don't use GMO seeds to maximize the harvest. We use 'Atalik' Gokova seed.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/tahin.jpeg' %}" alt="Tahini Jar">
+            <div>
+            <strong>Organic Tahini in a Jar</strong>
+            <p class="price">300 TL
+            <a href="https://shopier.com/koycebiz">Buy Now</a>
+			</p>
+			</div>
+        </div>
+
+        <div class="footer">
+            <p>Learn more about our farming practices on our main website.</p>
+        </div>
+    </div>
+</body>
+</html>
