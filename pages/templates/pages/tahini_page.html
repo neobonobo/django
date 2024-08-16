@@ -28,11 +28,11 @@
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2em;
             color: #4CAF50;
-            text-align: left;
+            text-align: center;
             grid-column: span 2;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .concept {
@@ -45,38 +45,101 @@
         }
 
         .concept img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             margin-right: 20px;
             border-radius: 20%;
             object-fit: cover;
         }
 
-		.concept a {
-			text-decoration: none;
-			color:black;
-		}
-        .concept p {
+        .concept a {
+            text-decoration: none;
+            color: black;
+        }
 
-            font-size: 1.2em;
-            line-height: 1.6;
+        .concept p {
+            font-size: 1em;
+            line-height: 1.4;
             margin: 0;
         }
 
         .concept strong {
-            font-size: 1.4em;
+            font-size: 1.2em;
             color: #333;
             display: block;
             margin-bottom: 10px;
         }
 
+        .footer {
+            grid-column: span 2;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
         @media (max-width: 768px) {
             .container {
-                grid-template-columns: 1fr;
+                padding: 15px;
             }
 
             h1 {
-                text-align: center;
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            .concept img {
+                width: 60px;
+                height: 60px;
+                margin-right: 15px;
+            }
+
+            .concept p {
+                font-size: 0.9em;
+            }
+
+            .concept strong {
+                font-size: 1.1em;
+            }
+
+            .footer p {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .concept {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .concept img {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+
+            .concept p {
+                font-size: 0.85em;
+            }
+
+            .concept strong {
+                font-size: 1em;
+            }
+
+            .footer p {
+                font-size: 0.75em;
             }
         }
     </style>
@@ -90,6 +153,16 @@
             <div>
                 <strong>No Pesticides</strong>
                 <p>We don't use pesticides to kill bugs. Instead, we use organic solutions that are safe for the environment and for our customers.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/tahin.jpeg' %}" alt="Tahini Jar">
+            <div>
+                <strong>Organic Tahini in a Jar</strong>
+                <p class="price">300 TL
+                    <a href="https://shopier.com/koycebiz">Buy Now</a>
+                </p>
             </div>
         </div>
 
@@ -109,18 +182,8 @@
             </div>
         </div>
 
-        <div class="concept">
-            <img src="{% static 'images/tahin.jpeg' %}" alt="Tahini Jar">
-            <div>
-            <strong>Organic Tahini in a Jar</strong>
-            <p class="price">300 TL
-            <a href="https://shopier.com/koycebiz">Buy Now</a>
-			</p>
-			</div>
-        </div>
-
         <div class="footer">
-            <p>Learn more about our farming practices on our main website.</p>
+            <p>Footer Placeholder</p>
         </div>
     </div>
 </body>

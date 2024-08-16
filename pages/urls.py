@@ -4,6 +4,6 @@ from django.urls import path
 from .views import ChatBotTemplateView, tahini_view
 
 urlpatterns = [
-    path('', ChatBotTemplateView.as_view(), name='home'),
-    path('tahini/', tahini_view, name='tahini'),
+    path('chat/', ChatBotTemplateView.as_view(), name='home'),
+    path('', tahini_view, name='tahini'),
 ]
