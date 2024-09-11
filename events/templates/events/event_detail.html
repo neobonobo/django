@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ event.title }}</title>
+</head>
+<body>
+    <h1>{{ event.title }}</h1>
+    <p>Location: {{ event.location }}</p>
+    <p>Date: {{ event.date }}</p>
+    <p>End Date: {{ event.end_date }}</p>
+    <p>Fee: {{ event.fee }}</p>
+    <p>Topics: {{ event.topics }}</p>
+    <p>Food: {{ event.food }}</p>
+    <p>Max Attendees: {{ event.max_attendees }}</p>
+    {% if event.image %}
+        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+    {% endif %}
+</body>
+</html>
