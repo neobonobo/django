@@ -1,56 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event List</title>
-</head>
-<style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-        }
-
-        h1 {
-            font-size: 2em;
-            color: #4CAF50;
-            text-align: center;
-            grid-column: span 2;
-            margin-bottom: 30px;
-        }
-  @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-                margin-bottom: 20px;
-            }
-  }
-</style>
-
-<body>
-	<div class="container">
-    <h1>Events</h1>
-    <ul>
-        {% for event in events %}
-            <li>
+<!-- templates/event_list.html -->
+{% extends 'events/_base.html' %}
+{% block content%}
+    {% for event in events %}
+		<div class="event-item">
 				<a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
                 <p>Location: {{ event.location }}</p>
                 <p>Date: {{ event.date }}</p>
@@ -60,11 +12,8 @@
                 {% if event.image %}
                     <img src="{{ event.image.url }}" alt="{{ event.title }}">
                 {% endif %}
-            </li>
+            </div>
         {% empty %}
             <p>No events available.</p>
         {% endfor %}
-    </ul>
-	</div>
-</body>
-</html>
+{% endblock content%}
