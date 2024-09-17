@@ -1,13 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'pages/_base.html' %}
+{% load static %}
     <title>Tahini the Hard Way</title>
-    <link rel="stylesheet" href="{% static 'css/tahini.css' %}">
-    <style>
-        body {
+</head>
+
+{% block content %}
+
+        <h1>Stone-Milled Tahini</h1>
+        <div class="concept">
+            <img src="{% static 'images/no_pesticides.jpg' %}" alt="No Pesticides">
+            <div>
+                <strong>No Pesticides</strong>
+                <p>We don't use pesticides to kill bugs. Instead, we use organic solutions that are safe for the environment and for our customers.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/tahin.jpeg' %}" alt="Tahini Jar">
+            <div>
+                <strong>Organic Tahini in a Jar</strong>
+                <p class="price">300 TL
+                    <a href="https://shopier.com/koycebiz">Buy Now</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/no_herbicides.jpg' %}" alt="No Herbicides">
+            <div>
+                <strong>No Herbicides</strong>
+                <p>We don’t use herbicides to kill weeds. Instead, we rely on the hard work of our volunteers who constantly weed the fields manually.</p>
+            </div>
+        </div>
+
+        <div class="concept">
+            <img src="{% static 'images/no_gmo.jpg' %}" alt="No GMO Seeds">
+            <div>
+                <strong>No GMO Seeds</strong>
+                <p>We don't use GMO seeds to maximize the harvest. We use 'Atalik' Gokova seed.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+        </div>
+    </div>
+{% endblock content %}
+{% block style %}
+body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #f9f9f9;
             color: #333;
@@ -142,49 +180,5 @@
                 font-size: 0.75em;
             }
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Stone-Milled Tahini</h1>
+{% endblock style %}
 
-        <div class="concept">
-            <img src="{% static 'images/no_pesticides.jpg' %}" alt="No Pesticides">
-            <div>
-                <strong>No Pesticides</strong>
-                <p>We don't use pesticides to kill bugs. Instead, we use organic solutions that are safe for the environment and for our customers.</p>
-            </div>
-        </div>
-
-        <div class="concept">
-            <img src="{% static 'images/tahin.jpeg' %}" alt="Tahini Jar">
-            <div>
-                <strong>Organic Tahini in a Jar</strong>
-                <p class="price">300 TL
-                    <a href="https://shopier.com/koycebiz">Buy Now</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="concept">
-            <img src="{% static 'images/no_herbicides.jpg' %}" alt="No Herbicides">
-            <div>
-                <strong>No Herbicides</strong>
-                <p>We don’t use herbicides to kill weeds. Instead, we rely on the hard work of our volunteers who constantly weed the fields manually.</p>
-            </div>
-        </div>
-
-        <div class="concept">
-            <img src="{% static 'images/no_gmo.jpg' %}" alt="No GMO Seeds">
-            <div>
-                <strong>No GMO Seeds</strong>
-                <p>We don't use GMO seeds to maximize the harvest. We use 'Atalik' Gokova seed.</p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Footer Placeholder</p>
-        </div>
-    </div>
-</body>
-</html>

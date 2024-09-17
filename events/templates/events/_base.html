@@ -4,6 +4,7 @@
   <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
   </head>
   <body>
 	<div class="container">
@@ -46,5 +47,27 @@ body {
 a {
 	text-decoration: none;
 	color: black;
+}
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.flex-container > div {
+	padding: 20px;
+	max-width: 40%;
+}
+.event-item > div > img {
+	width:200px;
+}
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+  .flex-container > div {
+    padding: 20px;
+    max-width: 90%;
+}
 }
 </style>

@@ -7,3 +7,6 @@ class ChatBotTemplateView(TemplateView):
  
 def tahini_view(request):
     return render(request, 'pages/tahini_page.html') 
+
+def cv_view(request):
+    return render(request, 'pages/cv.html')

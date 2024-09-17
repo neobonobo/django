@@ -1,19 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ event.title }}</title>
-</head>
-<body>
-    <h1>{{ event.title }}</h1>
-    <p>Location: {{ event.location }}</p>
-    <p>Date: {{ event.date }}</p>
-    <p>End Date: {{ event.end_date }}</p>
-    <p>Fee: {{ event.fee }}</p>
-    <p>Topics: {{ event.topics }}</p>
-    <p>Food: {{ event.food }}</p>
-    <p>Max Attendees: {{ event.max_attendees }}</p>
-    {% if event.image %}
-        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+{% extends 'events/_base.html' %}
+{% block content %}
+<div class="flex-container">
+	<div>
+    <h2>{{ event.title }}</h2>
+    <p>Mekan: {{ event.location }}</p>
+    <p>Başlangıc: {{ event.date }}</p>
+    <p>Bitis: {{ event.end_date }}</p>
+    <p>Fiyat: {{ event.fee }}</p>
+    <p>Konular: {{ event.topics }}</p>
+    <p>Yemek: {{ event.food }}</p>
+    <p>Max Katılımcı: {{ event.max_attendees }}</p>
+	</div>
+	<div>
+    <!-- Attendee Form -->
+    <h2>Katılmak istiyorum</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Join Event</button>
+</form>
+{% if form.errors %}
+        <div style="color:red;">
+            <p>There was an error submitting the form. Please check your input.</p>
+        </div>
     {% endif %}
-</body>
-</html>
+<!-- Attendees List -->
+    <h3>Katılımcılar:</h3>
+    <ul>
+        {% for attendee in event.attendees.all %}
+            <li>{{ attendee.name }} </li>
+        {% empty %}
+            <p>No attendees yet. Be the first to join!</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
