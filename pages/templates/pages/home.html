@@ -4,72 +4,46 @@
 {% block content %}
 <div class="section">
   <img src="{% static 'images/farm_small.jpg' %}">
-  <div class="infos">
-	  <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+  <div class="login">
+  <form method="post">
+    {% csrf_token %}
+    
+    <!-- Username field -->
+    <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <!-- Optional: Display username field errors -->
+        {{ form.username.errors }}
+    </div>
 
+    <!-- Password field -->
+    <div class="form-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        <!-- Optional: Display password field errors -->
+        {{ form.password.errors }}
+    </div>
+
+    <button type="submit" class="btn">Login</button>
+</form> 
     {% if form.errors %}
-        <div style="color: red;">
-            <p>Invalid credentials. Please try again.</p>
-        </div>
+      <div class="error-message">
+        <p>Invalid credentials. Please try again.</p>
+      </div>
     {% endif %}
   </div>
 </div>
-
 <a href="{% url 'event-list' %}">
-<div class="section">
-	<h2>Events / Buluşmalar</h2>
-</div>
+  <div class="section">
+    <h2>Events / Buluşmalar</h2>
+  </div>
 </a>
-
 <div class="section">
-	<h2>Products / Ürünler</h2>
+  <h2>Products / Ürünler</h2>
 </div>
 <div class="section">
-	<h2>Tutorials / Yardım Dokümanları</h2>
+  <h2>Tutorials / Yardım Dokümanları</h2>
 </div>
-
 {% endblock content %}
 {% block style %}
-.section {
-display:flex;
-flex-direction: row;
-align-items: center;
-margin: 20px;
-color: tomato;
-padding: 20px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-border-radius: 10px;
-}
-.section img {
-	border-radius: 8px;
-	margin-right: 20px;
-}
-.button {
- background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-.infos {
- background-color: black;
-  color: yellow;
-display:flex;
-flex-direction: column;
-padding:20px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-border-radius: 10px;
-
-}
 {% endblock style %}
-
