@@ -1,0 +1,14 @@
+<!-- templates/daytrack/day_detail.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>Your Day on {{ day.date }}</h2>
+  <p><strong>Wake Up Time:</strong> {{ day.wake_up_time }}</p>
+  <p><strong>Description:</strong> {{ day.description }}</p>
+  <p><strong>Mood:</strong> {{ day.mood }}</p>
+  <p><strong>Activities:</strong> {{ day.activities }}</p>
+
+  <a href="{% url 'update-day' %}">Edit Day</a>
+  <a href="{% url 'delete-day' %}">Delete Day</a>
+  <a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

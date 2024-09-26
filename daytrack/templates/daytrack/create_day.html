@@ -1,0 +1,12 @@
+<!-- templates/daytrack/create_day.html -->
+{% extends "daytrack/_base.html" %}
+
+{% block content %}
+  <h2>Create Your Day Entry</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Day</button>
+  </form>
+  <a href="{% url 'home' %}">Cancel</a>
+{% endblock %}

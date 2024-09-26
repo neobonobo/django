@@ -1,0 +1,10 @@
+<!-- templates/daytrack/update_day.html -->
+{% extends "daytrack/_base.html" %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+	{{ form.activities }}
+    <button class="update_button" type="submit">Update Activities</button>
+  </form>
+{% endblock %}

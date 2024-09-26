@@ -1,0 +1,20 @@
+<!-- daytrack/templates/daytrack/dashboard.html -->
+{% extends 'daytrack/_base.html' %}
+
+{% block content %}
+    {% if created %}
+        <h2>It's a new day!</h2>
+        <form action="{% url 'create-day' %}" method="post">
+            {% csrf_token %}
+            <button class="iamup_button" type="submit">I'm Up</button>
+        </form>
+    {% else %}
+	<a href="{% url 'day-update' day.pk %}">
+	<div class="daytrack">
+        <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
+        <div><strong>Up Time:</strong> {{ day.wake_up_time |date:"h:i A"}}</div>
+        <div><strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
+	</div>
+	</a>
+    {% endif %}
+{% endblock %}

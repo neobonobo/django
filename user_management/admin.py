@@ -1,15 +1,19 @@
-# user_management/admin.py
-
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
+from .models import CustomUser
 
-User = get_user_model()
+class CustomUserAdmin(UserAdmin):
+    # Customizing the displayed fields for the user in the admin
+    fieldsets = UserAdmin.fieldsets  # Keeps default fields
+    add_fieldsets = UserAdmin.add_fieldsets  # Keeps default fields for adding users
 
-class UserAdmin(DefaultUserAdmin):
-    model = User
-    list_display = ('username', 'email', 'is_staff', 'is_active')
-    search_fields = ('username', 'email')
-    ordering = ('username',)
+    # Including groups (such as Root and Kalee) in the user form
+    filter_horizontal = ('groups', 'user_permissions',)
 
-admin.site.register(User, UserAdmin)
+# Register the CustomUser model with the admin
+admin.site.register(CustomUser, CustomUserAdmin)
+
+# Register the Group model in case you want to manage groups manually in the admin
+admin.site.unregister(Group)  # Optional: To prevent default Django group management
+admin.site.register(Group)

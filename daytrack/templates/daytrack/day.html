@@ -1,0 +1,27 @@
+<!-- templates/day.html -->
+{% extends 'events/_base.html' %}
+{% block content%}
+{% if not day.wake_up_time %}
+    <form method="POST" action="{% url 'iam_up' %}">
+        {% csrf_token %}
+        <button type="submit">I am up!</button>
+    </form>
+{% else %}
+    <p>You woke up at {{ day.wake_up_time|date:'H:i' }}</p>
+{% endif %}
+
+<!-- Form to update other day details -->
+<form method="POST" action="{% url 'update_day' %}">
+    {% csrf_token %}
+    <label for="description">Description:</label>
+    <input type="text" name="description" value="{{ day.description }}" placeholder="How was your day?">
+
+    <label for="mood">Mood:</label>
+    <input type="text" name="mood" value="{{ day.mood }}" placeholder="Your mood">
+
+    <label for="activities">Activities:</label>
+    <textarea name="activities">{{ day.activities }}</textarea>
+
+    <button type="submit">Update Day</button>
+</form>
+{% endblock content%}

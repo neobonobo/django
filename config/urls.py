@@ -10,4 +10,5 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('', include('pages.urls')),
     path('api/', include('api.urls')),
+    path('daytrack/', include('daytrack.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
