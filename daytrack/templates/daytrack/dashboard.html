@@ -23,7 +23,7 @@
         {% if events %}
              {% for event in events %}
 			 <div>
-               {{ event.date|date:"F j, Y" }} 
+               {{ event.date|date:"F j, H:i A" }} 
 			   <br/>{{ event.title }}
 			 </div>
              {% endfor %}
