@@ -1,39 +1,46 @@
 <!-- daytrack/templates/daytrack/dashboard.html -->
 {% extends 'daytrack/_base.html' %}
-
 {% block content %}
-    {% if created %}
-        <h2>It's a new day!</h2>
-        <form action="{% url 'create-day' %}" method="post">
-            {% csrf_token %}
-            <button class="iamup_button" type="submit">I'm Up</button>
-        </form>
-    {% else %}
-	<a href="{% url 'day-update' day.pk %}">
-	<div class="daytrack">
+<div class="dashboard">
+  {% if created %}
+    <h2>It's a new day!</h2>
+    <form action="{% url 'create-day' %}" method="post">
+      {% csrf_token %}
+      <button class="iamup_button" type="submit">I'm Up</button>
+    </form>
+  {% else %}
+    <a href="{% url 'day-update' day.pk %}">
+    <div class="daytrack">
+    <h3>My Day</h3>
         <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
         <div><strong>Up Time:</strong> {{ day.wake_up_time |date:"h:i A"}}</div>
-        <div><strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
+		<div>
+ 	       <strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
+	</a>
 	</div>
 	<div class="events">
- 		<h2>Upcoming Events</h2>
+ 		<h3>Upcoming Events</h3>
         {% if events %}
-           <ul>
              {% for event in events %}
-              <li>
-              <strong>{{ event.title }}</strong> - {{ event.date|date:"F j, Y" }} 
-             <br>{{ event.description|linebreaksbr }}
-             </li>
+			 <div>
+               {{ event.date|date:"F j, Y" }} 
+			   <br/>{{ event.title }}
+			 </div>
              {% endfor %}
-          </ul>
         {% else %}
              <p>No upcoming events.</p>
         {% endif %}
 	</div>
+    {% endif %}
+	<div class="buttons">
 	{% if user.is_authenticated %}
-	<div class="logout">
-		<a href="{% url 'logout' %}">Logout</a>
+	  <div class="logout">
+        <form method="post" action="{% url 'logout' %}">
+    	  {% csrf_token %}
+    	  <button type="submit">Logout</button>
+        </form>
+	  </div>
+    {% endif %}
 	</div>
-    {% endif %}
-    {% endif %}
+</div>
 {% endblock %}

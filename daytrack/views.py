@@ -1,4 +1,5 @@
 # daytrack/views.py
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views.generic import UpdateView
@@ -13,7 +14,7 @@ def dashboard_view(request):
 
     # Check if the Day object for today exists
     day = Day.objects.filter(user=user, wake_up_time__date=today).first()
-    events = Event.objects.filter(date__lte=today, end_date__gte=today)
+    events = Event.objects.filter(end_date__gte=today)
     if not day:
         # If there is no day object for today, show the "I'm Up" button
         return render(request, 'daytrack/dashboard.html', {'created': True})  # created=True indicates to show the button
@@ -28,7 +29,6 @@ def create_day_view(request):
         day.wake_up_time = timezone.now()  # Set wake-up time when the button is clicked
         day.save()
         return redirect('dashboard')
-
     return redirect('dashboard')
 class DayUpdateView(UpdateView):
     model = Day
@@ -41,3 +41,5 @@ class DayUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('dashboard')  # Redirect to the dashboard after updating
+def logout_view(request):
+    logout(request)

@@ -3,6 +3,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/daytrack.css' %}">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Local | {% block title %}{% endblock title %} </title>
@@ -10,46 +11,6 @@
 .logout a {
   color: tomato; /* Color for the logout link */
   text-decoration: none; /* Removes underline */
-}
-.daytrack {
-	display:flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-end;
-	align-items: start;
-	font-family: Arial, Helvetica, sans-serif;
-	max-width: 200px;
-	background-color: #d2d2d2;
-	border-radius:20px;
-	padding: 20px;
-}
-.update_button {
-	float:left;
-  background-color: #04AA6D;
-  border: none;
-  font-size: 18px;
-  color: #FFFFFF;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-}
-.iamup_button {
-  position: relative;
-  background-color: #04AA6D;
-  border: none;
-  font-size: 38px;
-  color: #FFFFFF;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer;
-}
-.container {
-	display:flex;
-	flex-direction:row;
 }
 {% block style %}
 {% endblock style %}
