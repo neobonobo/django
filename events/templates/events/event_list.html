@@ -1,7 +1,9 @@
 <!-- templates/event_list.html -->
 {% extends 'events/_base.html' %}
+{% load static %}
 {% block content%}
 {% for event in events %}
+<div class="events">
 	<a href="{% url 'event-detail' event.pk %}">
 	<div class="event-item">
 		<div>
@@ -9,15 +11,17 @@
                 <img src="{{ event.image.url }}" alt="{{ event.title }}" >
             {% endif %}
 		</div>
-		<div class="event-info">
-            <p>{{ event.date|date:"l d M Y" }}</p>
-			<p>{{ event.title }}</p>
-            <p>{{ event.location }}</p>
-            <p>{{ event.topics }}</p>
+		<div>
+            <div>{{ event.date|date:"F j " }}</div>
+            <div>{{ event.date|date:"h:i A" }}</div>
+			<div>{{ event.title }}</div>
+            <div>{{ event.location }}</div>
+            <div>{{ event.topics }}</div>
         </div>
 	</div>
 	</a>
     {% empty %}
     <p>No events available.</p>
+</div>
 {% endfor %}
 {% endblock content%}
