@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 from .models import Day
+from events.models import Event
 from .forms import DayForm
 
 def dashboard_view(request):
@@ -12,12 +13,13 @@ def dashboard_view(request):
 
     # Check if the Day object for today exists
     day = Day.objects.filter(user=user, wake_up_time__date=today).first()
+    events = Event.objects.filter(date__lte=today, end_date__gte=today)
     if not day:
         # If there is no day object for today, show the "I'm Up" button
         return render(request, 'daytrack/dashboard.html', {'created': True})  # created=True indicates to show the button
 
     # If the day object exists, show its details
-    return render(request, 'daytrack/dashboard.html', {'day': day, 'created': False})
+    return render(request, 'daytrack/dashboard.html', {'day': day, 'events': events,'created': False})
 def create_day_view(request):
     if request.method == "POST":
         today = timezone.now().date()
@@ -35,7 +37,7 @@ class DayUpdateView(UpdateView):
     
     def get_object(self, queryset=None):
         today = timezone.now().date()
-        return get_object_or_404(Day, user=self.request.user)
+        return get_object_or_404(Day, user=self.request.user, wake_up_time__date=today)
 
     def get_success_url(self):
         return reverse_lazy('dashboard')  # Redirect to the dashboard after updating
