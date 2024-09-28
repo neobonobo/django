@@ -1,7 +1,7 @@
 {% extends 'events/_base.html' %}
 {% block content %}
-<div class="flex-container">
-	<div>
+<div class="event-details">
+	<div class="event-detail">
     <h2>{{ event.title }}</h2>
     <p>Mekan: {{ event.location }}</p>
     <p>Başlangıc: {{ event.date }}</p>
@@ -11,7 +11,7 @@
     <p>Yemek: {{ event.food }}</p>
     <p>Max Katılımcı: {{ event.max_attendees }}</p>
 	</div>
-	<div>
+	<div class="event-join">
     <!-- Attendee Form -->
     <h2>Katılmak istiyorum</h2>
 <form method="post">
@@ -33,5 +33,7 @@
             <p>No attendees yet. Be the first to join!</p>
         {% endfor %}
     </ul>
+	</div>
 
+<div>
 {% endblock %}

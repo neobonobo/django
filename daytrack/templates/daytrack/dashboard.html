@@ -1,33 +1,37 @@
 <!-- daytrack/templates/daytrack/dashboard.html -->
 {% extends 'daytrack/_base.html' %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% block content %}
 
 <div class="dashboard">
+
 {% if created %}
   <h2>It's a new day!</h2>
   <form action="{% url 'create-day' %}" method="post">
     {% csrf_token %}
-    <button class="iamup_button" type="submit">I'm Up</button>
+    <button class="iamup_button" type="submit">Im Up</button>
   </form>
 {% else %}
-  <div class="daytrack">
+
+<div class="daytrack">
       <div>My Day | <a href="{% url 'day-update' day.pk %}">Update</a></div> 
 	  <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
       <div><strong>Up Time:</strong> {{ day.wake_up_time |date:"h:i A"}}</div>
       <div><strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
-  </div>
- <div class="buttons">
-  {% if user.is_authenticated %}
-    <div class="logout">
-      <form method="post" action="{% url 'logout' %}">
-  	    {% csrf_token %}
-   	    <button type="submit">Logout</button>
-      </form>
-    </div>
-  {% endif %}
 </div>
 
-  <div class="events">
+
+<div class="rasa-container">
+  <div class="avatar">
+     <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+  </div>
+  <form id="chat-form" class="input-box">
+        <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
+  </form>
+  <div id="chat-output" class="bot-response"></div>
+</div>
+<div class="events">
 	<h3>Upcoming Events</h3>
     {% if events %}
        {% for event in events %}
@@ -39,9 +43,59 @@
     {% else %}
        <p>No upcoming events.</p>
     {% endif %}
-  </div>
- </a>
+</div>
 {% endif %}
 </div>
+<div class="buttons">
+{% if user.is_authenticated %}
+  <div class="logout">
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+    </form>
+  </div>
+{% endif %}
+</div>
+
+
+<script>
+	 document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userMessage = document.getElementById('user-message').value.trim();
+
+            if (userMessage === "") return;
+
+            document.getElementById('user-message').value = '';
+
+            fetch('http://localhost:5005/webhooks/rest/webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sender: 'user',
+                    message: userMessage
+                }),
+                mode: 'cors'  // Ensures CORS headers are properly set
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatOutput = document.getElementById('chat-output');
+                data.forEach(response => {
+                    chatOutput.innerHTML += `<p>${response.text}</p>`;  // Append each message
+                });
+                chatOutput.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById('user-message').addEventListener('focus', function() {
+            const chatOutput = document.getElementById('chat-output');
+            chatOutput.style.display = 'none';
+            chatOutput.innerHTML = '';
+        });
+    </script>
 
 {% endblock %}

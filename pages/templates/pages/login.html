@@ -1,0 +1,31 @@
+{% extends "pages/_base.html" %}
+{% load static %}
+{% block content %}
+<div class="login-container">
+    <div class="login">
+      <form method="post">
+      {% csrf_token %}
+      <!-- Username field -->
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <!-- Optional: Display username field errors -->
+        {{ form.username.errors }}
+      </div>
+      <!-- Password field -->
+      <div class="form-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        <!-- Optional: Display password field errors -->
+        {{ form.password.errors }}
+      </div>
+      <button type="submit" class="btn">Login</button>
+      </form> 
+    {% if form.errors %}
+      <div class="error-message">
+        <p>Invalid credentials. Please try again.</p>
+      </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock content %}

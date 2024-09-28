@@ -33,6 +33,7 @@
             background-color: #f9f9f9;
             padding: 10px;
             flex: 1;
+            margin-top: 5px;
         }
         .input-container {
             width: 100%;
@@ -69,7 +70,7 @@
     </style>
 </head>
 <body>
-	<a href="{% url 'tahini' %}">Learn more about our Tahini</a>
+    <a href="{% url 'tahini' %}">Learn more about our Tahini</a>
     <div class="chat-container">
         <div class="input-container">
             <div class="you-text">You:</div>
@@ -94,17 +95,23 @@
 
             document.getElementById('user-message').value = '';
 
-            fetch('/api/chat/', {  // Adjust endpoint if necessary
+            fetch('http://localhost:5005/webhooks/rest/webhook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: userMessage }),
+                body: JSON.stringify({
+                    sender: 'user',
+                    message: userMessage
+                }),
+                mode: 'cors'  // Ensures CORS headers are properly set
             })
             .then(response => response.json())
             .then(data => {
                 const chatOutput = document.getElementById('chat-output');
-                chatOutput.innerHTML = data.message; // Render the message as HTML
+                data.forEach(response => {
+                    chatOutput.innerHTML += `<p>${response.text}</p>`;  // Append each message
+                });
                 chatOutput.style.display = 'block';
             })
             .catch(error => {

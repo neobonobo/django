@@ -1,48 +1,26 @@
 {% extends "pages/_base.html" %}
 {% load static %}
-
 {% block content %}
-<div class="section">
-  <img src="{% static 'images/farm_small.jpg' %}">
-  <div class="login">
-  <form method="post">
-    {% csrf_token %}
-    
-    <!-- Username field -->
-    <div class="form-group">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        <!-- Optional: Display username field errors -->
-        {{ form.username.errors }}
-    </div>
-
-    <!-- Password field -->
-    <div class="form-group">
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        <!-- Optional: Display password field errors -->
-        {{ form.password.errors }}
-    </div>
-
-    <button type="submit" class="btn">Login</button>
-</form> 
-    {% if form.errors %}
-      <div class="error-message">
-        <p>Invalid credentials. Please try again.</p>
-      </div>
-    {% endif %}
-  </div>
-</div>
-<a href="{% url 'event-list' %}">
+<div class="sections">
   <div class="section">
+    <img src="{% static 'images/farm_small.jpg' %}">
+	<h2>Köycebiz Farm</h2>
+	<div class="login-button">
+      <a href="{% url 'login' %}" class="btn">Login</a>
+    </div>
+  </div> 
+
+  <div class="section">
+    <a href="{% url 'event-list' %}">
     <h2>Events / Buluşmalar</h2>
+    </a>
   </div>
-</a>
-<div class="section">
-  <h2>Products / Ürünler</h2>
-</div>
-<div class="section">
-  <h2>Tutorials / Yardım Dokümanları</h2>
+  <div class="section">
+    <h2>Products / Ürünler</h2>
+  </div>
+  <div class="section">
+    <h2>Tutorials / Yardım Dokümanları</h2>
+  </div>
 </div>
 {% endblock content %}
 {% block style %}
