@@ -1,46 +1,47 @@
 <!-- daytrack/templates/daytrack/dashboard.html -->
 {% extends 'daytrack/_base.html' %}
 {% block content %}
+
 <div class="dashboard">
-  {% if created %}
-    <h2>It's a new day!</h2>
-    <form action="{% url 'create-day' %}" method="post">
-      {% csrf_token %}
-      <button class="iamup_button" type="submit">I'm Up</button>
-    </form>
-  {% else %}
-    <a href="{% url 'day-update' day.pk %}">
-    <div class="daytrack">
-    <h3>My Day</h3>
-        <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
-        <div><strong>Up Time:</strong> {{ day.wake_up_time |date:"h:i A"}}</div>
-		<div>
- 	       <strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
-	</a>
-	</div>
-	<div class="events">
- 		<h3>Upcoming Events</h3>
-        {% if events %}
-             {% for event in events %}
-			 <div>
-               {{ event.date|date:"F j, H:i A" }} 
-			   <br/>{{ event.title }}
-			 </div>
-             {% endfor %}
-        {% else %}
-             <p>No upcoming events.</p>
-        {% endif %}
-	</div>
-    {% endif %}
-	<div class="buttons">
-	{% if user.is_authenticated %}
-	  <div class="logout">
-        <form method="post" action="{% url 'logout' %}">
-    	  {% csrf_token %}
-    	  <button type="submit">Logout</button>
-        </form>
-	  </div>
-    {% endif %}
-	</div>
+{% if created %}
+  <h2>It's a new day!</h2>
+  <form action="{% url 'create-day' %}" method="post">
+    {% csrf_token %}
+    <button class="iamup_button" type="submit">I'm Up</button>
+  </form>
+{% else %}
+  <div class="daytrack">
+      <div>My Day | <a href="{% url 'day-update' day.pk %}">Update</a></div> 
+	  <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
+      <div><strong>Up Time:</strong> {{ day.wake_up_time |date:"h:i A"}}</div>
+      <div><strong>Activities:</strong>{{ day.activities|linebreaksbr}}</div>
+  </div>
+ <div class="buttons">
+  {% if user.is_authenticated %}
+    <div class="logout">
+      <form method="post" action="{% url 'logout' %}">
+  	    {% csrf_token %}
+   	    <button type="submit">Logout</button>
+      </form>
+    </div>
+  {% endif %}
 </div>
+
+  <div class="events">
+	<h3>Upcoming Events</h3>
+    {% if events %}
+       {% for event in events %}
+          <div>
+             {{ event.date|date:"F j, H:i A" }} 
+			 {{ event.title }}
+		  </div>
+       {% endfor %}
+    {% else %}
+       <p>No upcoming events.</p>
+    {% endif %}
+  </div>
+ </a>
+{% endif %}
+</div>
+
 {% endblock %}
