@@ -13,7 +13,9 @@ db.sqlite3
 .env.*
 
 # Static files
-#/static/
+# Ignore static files
+static/js/rasa_nogit.js
+
 
 # Media files
 /media/

@@ -49,44 +49,4 @@
 </div>
 </div>
 
-<script>
-	 document.getElementById('chat-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const userMessage = document.getElementById('user-message').value.trim();
-
-            if (userMessage === "") return;
-
-            document.getElementById('user-message').value = '';
-
-            fetch('http://localhost:5005/webhooks/rest/webhook', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    sender: 'user',
-                    message: userMessage
-                }),
-                mode: 'cors'
-            })
-            .then(response => response.json())
-            .then(data => {
-                const chatOutput = document.getElementById('chat-output');
-                data.forEach(response => {
-                    chatOutput.innerHTML += `<p>${response.text}</p>`;  // Append each message
-                });
-                chatOutput.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-
-        document.getElementById('user-message').addEventListener('focus', function() {
-            const chatOutput = document.getElementById('chat-output');
-            chatOutput.style.display = 'none';
-            chatOutput.innerHTML = '';
-        });
-    </script>
-
 {% endblock %}
