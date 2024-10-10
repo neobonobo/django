@@ -1,23 +1,26 @@
 {% extends 'daytrack/_base.html' %}
 {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% block content %}
 
 <div class="dashboard">
 
 <div class="daytrack">
-      <div>My Day | <a href="{% url 'day-update' day.pk %}">Update</a></div> 
-	  <div><strong>Date:</strong> {{ day.wake_up_time|date:"F j" }}</div>
-      <div><strong>Up Time:</strong> {{ day.wake_up_time|date:"h:i A" }}</div>
-      <div><strong>Activities:</strong> {{ day.activities|linebreaksbr }}</div>
+	<div class="day"><strong> {{ day.date|date:"F j" }}</strong> </div>
+    <div>Up Time: {{ day.wake_up_time|date:"h:i A" }}</div>
+	<div class="activities">
+		<a href="{% url 'day-update' day.pk %}">
+	     	<strong>Activities:</strong> {{ day.activities|linebreaksbr }}
+		</a>
+	</div>
 </div>
 
-<div class="rasa-container">
+<div class="root-container">
   <div class="avatar">
      <img src="{% static 'images/avatar.png' %}" alt="Avatar">
   </div>
   <form id="chat-form" class="input-box">
-        <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
+	  <div><strong>Root Chat</strong></div>
+    <input type="text" id="user-message" placeholder="Type a message" autocomplete="off">
   </form>
   <div id="chat-output" class="bot-response"></div>
 </div>
@@ -26,16 +29,18 @@
 	<h3>Upcoming Events</h3>
     {% if events %}
        {% for event in events %}
+
+		<a href="{% url 'event-detail' event.pk %}">
           <div>
              {{ event.date|date:"F j, H:i A" }} 
 			 {{ event.title }}
 		  </div>
+		</a>
        {% endfor %}
     {% else %}
        <p>No upcoming events.</p>
     {% endif %}
 </div>
-
 
 <div class="buttons">
 {% if user.is_authenticated %}
@@ -47,6 +52,6 @@
   </div>
 {% endif %}
 </div>
-</div>
 
+</div>
 {% endblock %}

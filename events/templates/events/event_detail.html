@@ -1,39 +1,40 @@
 {% extends 'events/_base.html' %}
 {% block content %}
 <div class="event-details">
-	<div class="event-detail">
+  <div class="event-detail">
     <h2>{{ event.title }}</h2>
-    <p>Mekan: {{ event.location }}</p>
-    <p>Başlangıc: {{ event.date }}</p>
-    <p>Bitis: {{ event.end_date }}</p>
-    <p>Fiyat: {{ event.fee }}</p>
-    <p>Konular: {{ event.topics }}</p>
-    <p>Yemek: {{ event.food }}</p>
-    <p>Max Katılımcı: {{ event.max_attendees }}</p>
-	</div>
-	<div class="event-join">
-    <!-- Attendee Form -->
+  	<div> {{ event.topics }}</div>
+    <div>{{ event.location }}</div>
+    <div>{{ event.date|date:"l F j " }}</div>
+    <div>{{ event.date|date:"h:i" }} - {{ event.end_date|date:"h:i" }}</div>
+    <div>Fiyat: {{ event.fee }}</div>
+	{% if event.food %}
+	<div>Yemek: {{ event.food }}</div>
+	{% endif %}
+	<div>Max Katılımcı: {{ event.max_attendees }}</div>
+  </div>
+  <div class="event-join">
+  <!-- Attendee Form -->
     <h2>Katılmak istiyorum</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Join Event</button>
-</form>
-{% if form.errors %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Join Event</button>
+    </form>
+      {% if form.errors %}
         <div style="color:red;">
-            <p>There was an error submitting the form. Please check your input.</p>
+         <p>There was an error submitting the form. Please check your input.</p>
         </div>
-    {% endif %}
-<!-- Attendees List -->
-    <h3>Katılımcılar:</h3>
-    <ul>
+      {% endif %}
+    <!-- Attendees List -->
+      <ul>
         {% for attendee in event.attendees.all %}
-            <li>{{ attendee.name }} </li>
+        <li>{{ attendee.name }} </li>
         {% empty %}
-            <p>No attendees yet. Be the first to join!</p>
+          <p>No attendees yet. Be the first to join!</p>
         {% endfor %}
-    </ul>
-	</div>
+      </ul>
+  </div>
+</div>
 
-<div>
 {% endblock %}

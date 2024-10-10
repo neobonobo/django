@@ -3,4 +3,4 @@ from .models import Attendee
 class AttendeeForm(forms.ModelForm):
     class Meta:
         model = Attendee
-        fields = ['name', 'email', 'phone', 'contribution_type']
+        fields = ['name', 'email', 'phone' ]
