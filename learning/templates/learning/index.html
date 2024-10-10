@@ -1,0 +1,6 @@
+<h1>Welcome to AI Learn</h1>
+<ul>
+    {% for topic in topics %}
+        <li><a href="{% url 'topic_detail' topic.slug %}">{{ topic.title }}</a></li>
+    {% endfor %}
+</ul>

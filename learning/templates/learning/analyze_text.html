@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends 'learning/_base.html' %}
+{% load static %}
+{% block content %}
+    <title>NLP</title>
+    <h1>NLP Stuff</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="button-group">
+            <button type="submit" name="action" value="tokenize">Tokenizer</button>
+            <button type="submit" name="action" value="sentiment">Sentiment Analysis</button>
+            <button type="submit" name="action" value="pos"> Part-of-Speech</button>
+			<button type="submit" name="action" value="translate">Tr-En</button>
+        </div>
+    </form>
+
+    {% if tokenized_text %}
+        <div class="results">
+            <h2>Your Input:</h2>
+            <p>{{ user_text }}</p>
+            <h2>Tokenized Text:</h2>
+            <p>{{ tokenized_text }}</p>
+        </div>
+    {% endif %}
+
+    {% if sentiment %}
+        <div class="results">
+            <h2>Sentiment Analysis:</h2>
+            <p>Polarity: {{ sentiment.polarity }}</p>
+            <p>Subjectivity: {{ sentiment.subjectivity }}</p>
+        </div>
+    {% endif %}
+
+    {% if pos %}
+        <div class="results">
+            <h2>Part of Speech:</h2>
+            <p> {{ pos }}</p>
+        </div>
+    {% endif %}
+
+    {% if detected_language %}
+        <div class="results">
+            <p> {{ translated_text.text }}</p>
+        </div>
+    {% endif %}
+
+{% endblock content %}
