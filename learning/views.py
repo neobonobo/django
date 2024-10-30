@@ -13,7 +13,7 @@ import spacy
 from spacy.matcher import Matcher
 nlp = spacy.load("en_core_web_sm")
 matcher = Matcher(nlp.vocab)
-model = ChatOpenAI(model="gpt-4o-mini", openai_api_key=os.getenv('OPENAI_API_KEY'))
+#model = ChatOpenAI(model="gpt-4o-mini", openai_api_key=os.getenv('OPENAI_API_KEY'))
 user_memories = {}
 prompt = ChatPromptTemplate.from_messages(
     [
