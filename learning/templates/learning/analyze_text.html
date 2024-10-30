@@ -3,24 +3,33 @@
 {% load static %}
 {% block content %}
     <title>NLP</title>
-    <h1>NLP Stuff</h1>
+    <h1>NLP Natural Language Processing</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="button-group">
-            <button type="submit" name="action" value="tokenize">Tokenizer</button>
+            <button type="submit" name="action" value="tokenize">Tokenization</button>
             <button type="submit" name="action" value="sentiment">Sentiment Analysis</button>
             <button type="submit" name="action" value="pos"> Part-of-Speech</button>
 			<button type="submit" name="action" value="translate">Tr-En</button>
+			<button type="submit" name="action" value="ner">NER</button>
+			<button type="button" id="start-record-btn">Start Recording</button>
         </div>
     </form>
 
     {% if tokenized_text %}
         <div class="results">
+			<div>
+				Segmenting text into words, punctuations marks etc.
+			</div>
             <h2>Your Input:</h2>
             <p>{{ user_text }}</p>
             <h2>Tokenized Text:</h2>
-            <p>{{ tokenized_text }}</p>
+			<div class="output">
+			{% for token in tokenized_text %}
+			<div class="token">{{ token }}</div>
+			{% endfor %}
+			</div>
         </div>
     {% endif %}
 
@@ -33,6 +42,7 @@
     {% endif %}
 
     {% if pos %}
+	<div>Assigning word types to tokens, like verb or noun.</div>
         <div class="results">
             <h2>Part of Speech:</h2>
             <p> {{ pos }}</p>
@@ -44,5 +54,41 @@
             <p> {{ translated_text.text }}</p>
         </div>
     {% endif %}
+    {% if ner_text %}
+        <div class="results">
+			<div class='def'>
+				<h4>
+		Named Entity Recognition
+				</h4>
+		Labelling named “real-world” objects, like persons, companies or locations.
+		
+	<div>Extracting entities from text.</div>
+			</div>
+            <p> {{ ner_text }}</p>
+        </div>
+    {% endif %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const startButton = document.getElementById('start-record-btn');
+        const userInput = document.getElementById('id_user_text');
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
 
+        startButton.addEventListener('click', () => {
+            recognition.start();
+        });
+
+        recognition.addEventListener('result', (event) => {
+            const transcript = event.results[0][0].transcript;
+            userInput.value = transcript;
+        });
+
+        recognition.addEventListener('error', (event) => {
+            console.error('Speech recognition error:', event.error);
+            alert('Speech recognition error: ' + event.error);
+        });
+    });
+</script>
 {% endblock content %}

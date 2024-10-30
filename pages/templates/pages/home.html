@@ -1,27 +1,45 @@
 {% extends "pages/_base.html" %}
 {% load static %}
 {% block content %}
+
 <div class="sections">
-  <div class="section">
-    <img src="{% static 'images/farm_small.jpg' %}">
-	<h2>Köycebiz Farm</h2>
+
+<div class="section">
+    <div class="avatar" style="flex-basis: 10px;">
+      <img src="{% static 'images/avatar.png' %}" alt="Avatar">
+    </div>
+
+	<div style="flex-basis: 200px;">
+	  <strong> Chat with us </strong>
+      <form id="chat-form" class="input-box">
+        <input type="text" id="user-message" 
+		placeholder="Type a message" autocomplete="off">
+      </form>
+	</div>
+
+    <div id="chat-output" class="bot-response" ></div>
 	<div class="login-button">
       <a href="{% url 'login' %}" class="btn">Login</a>
     </div>
-  </div> 
+  </div>
 
   <div class="section">
     <a href="{% url 'event-list' %}">
-    <h2>Events / Buluşmalar</h2>
+    <h2>Events</h2>
     </a>
   </div>
   <div class="section">
-    <h2>Products / Ürünler</h2>
+    <h2>Products </h2>
   </div>
   <div class="section">
-    <h2>Tutorials / Yardım Dokümanları</h2>
+    <a href="{% url 'interests' %}">
+    <h2>Interests </h2>
+    </a>
   </div>
 </div>
 {% endblock content %}
 {% block style %}
 {% endblock style %}
+  <div>
+	<iframe src="https://discordapp.com/widget?id=1300104577605042228&theme=dark" width="300" height="200" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> 
+  </div>

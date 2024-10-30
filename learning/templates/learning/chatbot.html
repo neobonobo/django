@@ -1,0 +1,16 @@
+<!-- learning/templates/learning/chatbot.html -->
+{% extends 'learning/_base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Ask the AI</h1>
+    <form method="POST">
+        {% csrf_token %}
+		{{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    {% if response %}
+        <h2>Response:</h2>
+        <p>{{ response.content }}</p>
+    {% endif %}
+
+{% endblock content %}

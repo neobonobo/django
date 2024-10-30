@@ -1,0 +1,35 @@
+{% extends 'learning/_base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="interests">
+	<a href="{% url 'analyze_text' %}">
+	<div class="item">
+		<h3>NLP Natural Language Processing</h3>
+		<p>Natural language processing is the ability of computers to understand human language.</p>
+	</div>
+	</a>
+	<a href="{% url 'chatbot' %}">
+	<div class="item">
+		<h3>Generative AI</h3>
+		<p>AI models that generate new content, such as text, images, music, or code.</p>
+	</div>
+	</a>
+	<div class="item">
+		<h3>Computer Vision</h3>
+		<p>a field of computer science that focuses on enabling computers to identify and understand objects and people in images and videos. </p>
+	</div>
+	<div class="item">
+		<h3>AI Agents</h3>
+		<p>Natural language processing is the ability of computers to understand human language.</p>
+	</div>
+	<div class="item">
+		<h3>Machine Learning</h3>
+		<p>Natural language processing is the ability of computers to understand human language.</p>
+	</div>
+	<div class="item">
+		<h3>Deep Learning</h3>
+		<p>A subset of ML that uses neural networks with many layers (deep neural networks) to model complex patterns in data.</p>
+	</div>
+</div>
+{% endblock content %}

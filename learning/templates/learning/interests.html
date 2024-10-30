@@ -1,0 +1,28 @@
+{% extends 'learning/_base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="interests">
+<a href="{% url 'ai' %}">
+<div class="item">
+	<h3 style="background-color:paleturquoise;">Artificial Intelligence</h3>
+	<p>the theory and development of computer systems able to perform tasks normally requiring human intelligence, such as visual perception, speech recognition, decision-making, and translation between languages.</p>
+</div>
+</a>
+
+<div class="item">
+	<h3 style="background-color:paleturquoise;">Robotics</h3>
+	<p>Any automatically operated machine that replaces human effort</p>
+</div>
+
+<div class="item">
+	<h3 style="background-color:paleturquoise;">Programming</h3>
+	<p>A technological process for telling a computer which tasks to perform in order to solve problems</p>
+</div>
+
+<div class="item">
+	<h3 style="background-color:paleturquoise;">IT Workshops</h3>
+	<p>We organize IT workshops as events that bring together like-minded individuals to explore and discuss shared interests.</p>
+</div>
+</div>
+{% endblock content %}
