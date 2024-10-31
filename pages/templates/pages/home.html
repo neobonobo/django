@@ -9,7 +9,7 @@
       <img src="{% static 'images/avatar.png' %}" alt="Avatar">
     </div>
 
-	<div style="flex-basis: 200px;">
+	<div class="chat-input" style="flex-basis: 200px;">
 	  <strong> Chat with us </strong>
       <form id="chat-form" class="input-box">
         <input type="text" id="user-message" 
@@ -17,7 +17,8 @@
       </form>
 	</div>
 
-    <div id="chat-output" class="bot-response" ></div>
+    <div id="chat-output"  class="bot-response" ></div>
+
 	<div class="login-button">
       <a href="{% url 'login' %}" class="btn">Login</a>
     </div>
