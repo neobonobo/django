@@ -15,7 +15,9 @@ db.sqlite3
 # Static files
 # Ignore static files
 static/js/rasa_nogit.js
-
+static/images
+staticfiles/
+exchange/
 
 # Media files
 /media/
