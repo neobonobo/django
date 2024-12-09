@@ -1,0 +1,30 @@
+{% extends "products/_base.html" %}
+{% load static %}
+{% block content %}
+<div class="product-detail">
+  <img src="{% static 'images/Tahin_125.jpg' %}" style="width: 500px; height: auto;" alt="Avatar">
+  <img src="{% static 'images/Tahin_126.jpg' %}" style="width: 500px; height: auto;" alt="Avatar">
+  <h2>{{ product.name }}</h2>
+  {% if product.image %}
+    <img class='product-image' src="{{ product.image.url }}" alt="{{ product.name }}">
+  {% endif %}
+  <p>{{ product.description }}</p>
+  <p>Price: {{ product.price_per_unit }} per {{ product.unit }}</p>
+  <p>Unit: {{ product.unit }}</p>
+  <p>Price per unit: {{ product.price_per_unit }}</p>
+  {% if user.is_authenticated %}
+    <!-- Show reservation form for logged-in users -->
+    <form method="POST" action="{% url 'reserve_product' product.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Order</button>
+    </form>
+  {% else %}
+    <!-- Show link to Shopier page for non-authenticated users -->
+    <a href="https://www.shopier.com/ShowProductNew/products.php?id=26730306" class="btn btn-primary">Order</a>
+  {% endif %}
+
+  {% for image in product.images.all %}
+    <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" style="width: 200px; height: auto;">
+  {% endfor %}
+</div>
+{% endblock %}

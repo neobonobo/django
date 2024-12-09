@@ -1,0 +1,54 @@
+
+{% extends "_base.html" %}
+
+{% block content %}
+  <h2>Exchange History between {{ user1.username }} and {{ user2.username }}</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Giver</th>
+        <th>Receiver</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Estimated Value</th>
+        <th>Timestamp</th>
+        <th>Settled</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exchange in exchanges %}
+        <tr>
+          <td>{{ exchange.giver }}</td>
+          <td>{{ exchange.receiver }}</td>
+          <td>{{ exchange.item.name }}</td>
+          <td>{{ exchange.quantity }} {{ exchange.item.unit }}</td>
+          <td>{{ exchange.value_estimate }}</td>
+          <td>{{ exchange.timestamp }}</td>
+          <td>{{ exchange.is_settled }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="7">No exchanges available.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Total Difference</h3>
+  {% if settlement.amount_due > 0 %}
+    <p>{{ user1.username }} owes {{ settlement.amount_due }} to {{ user2.username }}</p>
+  {% elif settlement.amount_due < 0 %}
+    <p>{{ user2.username }} owes {{ settlement.amount_due|abs }} to {{ user1.username }}</p>
+  {% else %}
+    <p>No outstanding balance</p>
+  {% endif %}
+
+  {% if settlement.amount_due != 0 %}
+    <form action="{% url 'settle_exchanges' user1.id user2.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Settle Exchanges</button>
+    </form>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,101 @@
+body {
+    background-color: #ddd;
+	margin: 0; padding: 0;
+	font-family: "Monaco", "Courier New", monospace;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.container {
+    max-width: 95%;
+    margin: 0px auto;
+	margin-top: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+	background-color: green;
+}
+
+.products{
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.product {
+	width:300px;
+	display:grid;
+	opacity: 0.9;
+	background-color: snow;
+	padding: 10px;
+	margin:10px;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+	grid-column: 1;
+	grid-row: 1 ;
+	width: 100px;
+	height: auto;
+	margin:10px;
+}
+
+.product-name {
+	grid-column: 1;
+	grid-row: 2 ;
+	margin:auto;
+	background-color: snow;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-desc {
+	grid-row: 4 / span 2;
+	margin:auto;
+	background-color: snow;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-price {
+	grid-column: 2;
+	grid-row: 2 ;
+	margin:auto;
+	background-color: snow;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-order {
+	grid-column: 2;
+	grid-row: 3 ;
+	margin:auto;
+	background-color: darkseagreen;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button {
+	grid-row: 1 ;
+	grid-column: 2;
+	margin:10px;
+	width: 80px;
+	background-color: snow;
+	border-radius: 5px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+}

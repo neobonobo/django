@@ -26,6 +26,11 @@ class HomePageView(View):
         
         # If login is invalid, return the form with error messages
         return render(request, 'pages/home.html', {'form': form, 'error': 'Invalid credentials. Please try again.'})
+
+
+
+
+
 class ChatBotTemplateView(TemplateView):
     template_name = 'pages/chatbot.html'
 def tahini_view(request):

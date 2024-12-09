@@ -1,0 +1,21 @@
+<!-- reservation_list.html -->
+<h1>Product Reservations</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Product</th>
+            <th>Reserved On</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.user.username }}</td>
+                <td>{{ reservation.product.name }}</td>
+                <td>{{ reservation.reserved_on }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
