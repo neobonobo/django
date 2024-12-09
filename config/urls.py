@@ -9,7 +9,8 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
-    path('', include('pages.urls')),
+    # path('', include('pages.urls')),
+    path('', auth_views.LoginView.as_view(template_name='pages/login.html'), name='login'),
     path('api/', include('api.urls')),
     path('daytrack/', include('daytrack.urls')),
     path('learning/', include('learning.urls')),

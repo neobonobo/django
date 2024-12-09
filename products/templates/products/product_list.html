@@ -4,19 +4,19 @@
 <div class="products">
 {% for product in products %}
 <div class="product">
-{% if product.image %}
-   <img src="{{ product.image.url }}" alt="{{ product.name }}">
-{% endif %}
-<div class="product-name">
+  <div class="product-name">
    	{{ product.name }} 
-</div>
-<div class="product-desc">
+  </div>
+  {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+  {% endif %}
+  <div class="product-desc">
 	{{ product.description }}
-</div>
-<div class="product-price">
+  </div>
+  <div class="product-price">
     {{ product.price_per_unit }}
     <span>&#8378;</span> / {{ product.unit }}
-</div>
+  </div>
 </div>
 {% endfor %}
 {% endblock %}

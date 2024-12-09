@@ -1,0 +1,75 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc; /* Light background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Login container */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff; /* White for clean look */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Heading style */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333; /* Dark gray for headings */
+}
+
+/* Form style */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #e1e8f0; /* Light border */
+    border-radius: 4px;
+    background-color: #f1f5f8; /* Soft background for inputs */
+    font-size: 16px;
+}
+
+/* Input field focus effect */
+form input:focus {
+    border-color: #1e90ff; /* Blue border on focus */
+    outline: none;
+}
+
+/* Button style */
+form button {
+    padding: 12px;
+    background-color: #007bff; /* Primary blue */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+}
+
+/* Error message */
+.error {
+    color: #e74c3c; /* Bright red for error messages */
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Optional footer or additional styles */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #777;
+}
