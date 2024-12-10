@@ -2,21 +2,28 @@
 
 {% block content %}
 <div class="products">
+
 {% for product in products %}
 <div class="product">
-  <div class="product-name">
-   	{{ product.name }} 
-  </div>
+  <div class="image">
   {% if product.image %}
     <img src="{{ product.image.url }}" alt="{{ product.name }}">
   {% endif %}
-  <div class="product-desc">
-	{{ product.description }}
   </div>
-  <div class="product-price">
-    {{ product.price_per_unit }}
-    <span>&#8378;</span> / {{ product.unit }}
+  <div class="header">
+	  {{ product.name }} 
+  </div>
+  <div class="description">
+	{{ product.description }}
   </div>
 </div>
 {% endfor %}
+
+</div>
 {% endblock %}
+<div class="footer">
+    {{ product.price_per_unit }}
+    <span>&#8378;</span> / {{ product.unit }}
+  </div>
+
+
