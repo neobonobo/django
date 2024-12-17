@@ -1,26 +1,30 @@
 /* General styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f7f9fc; /* Light background */
+    background-color: #f7f9f7; /* Light background */
     margin: 0;
     padding: 0;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+    background-color: #f7f9f7; /* Light background */
 }
 
 /* Login container */
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #ffffff; /* White for clean look */
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Heading style */
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333333; /* Dark gray for headings */
+	display:flex;
+	flex-direction: column;
+	max-width: 400px;
+	max-height: 400px;
+	margin: auto;
+	padding: 20px;
+	background: snow; 
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Form style */
@@ -34,7 +38,7 @@ form input {
     margin-bottom: 12px;
     border: 1px solid #e1e8f0; /* Light border */
     border-radius: 4px;
-    background-color: #f1f5f8; /* Soft background for inputs */
+    background-color: snow; /* Soft background for inputs */
     font-size: 16px;
 }
 

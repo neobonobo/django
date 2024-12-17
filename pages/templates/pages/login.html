@@ -3,35 +3,33 @@
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% block content %}
 <div class="login-container">
-    <div class="login">
-        <h2>Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            <!-- Username field -->
-            <div class="form-group">
-                {{ form.username.label_tag }}
-                {{ form.username }}
-                <!-- Optional: Display username field errors -->
-                {% if form.username.errors %}
-                    <div class="error">{{ form.username.errors }}</div>
-                {% endif %}
-            </div>
-            <!-- Password field -->
-            <div class="form-group">
+	<h2>Köycebiz</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Username field -->
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            <!-- Optional: Display username field errors -->
+            {% if form.username.errors %}
+                <div class="error">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+        <!-- Password field -->
+        <div class="form-group">
                 {{ form.password.label_tag }}
                 {{ form.password }}
                 <!-- Optional: Display password field errors -->
                 {% if form.password.errors %}
                     <div class="error">{{ form.password.errors }}</div>
                 {% endif %}
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
-        {% if form.errors %}
-            <div class="error-message">
-                <p>Invalid credentials. Please try again.</p>
-            </div>
-        {% endif %}
+        </div>
+        <button type="submit" class="btn">Login</button>
+    </form>
+    {% if form.errors %}
+    <div class="error-message">
+       <p>Invalid credentials. Please try again.</p>
     </div>
+    {% endif %}
 </div>
 {% endblock content %}

@@ -1,12 +1,11 @@
-{% extends 'daytrack/_base.html' %}
+{% extends 'pages/_base.html' %}
 {% load static %}
 {% block content %}
-
-<div class="dashboard">
-
+<link rel="stylesheet" href="{% static 'css/daytrack.css' %}">
+<div class="dashboard-container">
 <div class="daytrack">
 	<div class="day"><strong> {{ day.date|date:"F j" }}</strong> </div>
-    <div>Up Time: {{ day.wake_up_time|date:"h:i A" }}</div>
+    <div class="up-time">Up Time: {{ day.wake_up_time|date:"h:i A" }}</div>
 	<div class="activities">
 		<a href="{% url 'day-update' day.pk %}">
 	     	<strong>Activities:</strong> {{ day.activities|linebreaksbr }}
